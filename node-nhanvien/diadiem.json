@@ -1,0 +1,405 @@
+{
+  "predictions": [
+    {
+      "description": "120 Điện Biên Phủ, Phường 17, Bình Thạnh, Hồ Chí Minh",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        },
+        {
+          "length": 4,
+          "offset": 4
+        },
+        {
+          "length": 4,
+          "offset": 9
+        },
+        {
+          "length": 3,
+          "offset": 14
+        },
+        {
+          "length": 3,
+          "offset": 19
+        }
+      ],
+      "place_id": "nRz68qZIn0lkrHoTn3Ksh2evdUSmUJnnU69kPbdAYzyrs2bxpGJ7IGe0dxykI6zOZ69Isygjp8NUtmq2n42JZ1eDUwulU7_cYf91R4VAhexgsxMT9t0iVhWKFEjipSP7F",
+      "reference": "nRz68qZIn0lkrHoTn3Ksh2evdUSmUJnnU69kPbdAYzyrs2bxpGJ7IGe0dxykI6zOZ69Isygjp8NUtmq2n42JZ1eDUwulU7_cYf91R4VAhexgsxMT9t0iVhWKFEjipSP7F",
+      "structured_formatting": {
+        "main_text": "120 Điện Biên Phủ",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          },
+          {
+            "length": 4,
+            "offset": 4
+          },
+          {
+            "length": 4,
+            "offset": 9
+          },
+          {
+            "length": 3,
+            "offset": 14
+          }
+        ],
+        "secondary_text": "Phường 17, Bình Thạnh, Hồ Chí Minh",
+        "secondary_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ]
+      },
+      "has_children": false,
+      "plus_code": {
+        "compound_code": "+6O6E2 Phường 17, Bình Thạnh, Hồ Chí Minh",
+        "global_code": "46B7F+6O6E2"
+      },
+      "compound": {
+        "district": "Bình Thạnh",
+        "commune": "Phường 17",
+        "province": "Hồ Chí Minh"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "120 Điện Biên Phủ"
+        },
+        {
+          "offset": 24,
+          "value": "Phường 17"
+        },
+        {
+          "offset": 38,
+          "value": "Bình Thạnh"
+        },
+        {
+          "offset": 53,
+          "value": "Hồ Chí Minh"
+        }
+      ],
+      "types": ["house_number"],
+      "distance_meters": null
+    },
+    {
+      "description": "120 Điện Biên Phủ, Đa Kao, Quận 1, Hồ Chí Minh",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        },
+        {
+          "length": 4,
+          "offset": 4
+        },
+        {
+          "length": 4,
+          "offset": 9
+        },
+        {
+          "length": 3,
+          "offset": 14
+        }
+      ],
+      "place_id": "WHcMlXpDV1B0tlgDvGq8l3ePYlS_ZYn3Q7adLPb90u0Brp-Ewo3aN0kKMXxukZ7zed7QzWL-jt9NEprkzWDiZzEePpu-TWRvqcbVDr5VllSxwj3P8owOFA1CnciiVAu7V",
+      "reference": "WHcMlXpDV1B0tlgDvGq8l3ePYlS_ZYn3Q7adLPb90u0Brp-Ewo3aN0kKMXxukZ7zed7QzWL-jt9NEprkzWDiZzEePpu-TWRvqcbVDr5VllSxwj3P8owOFA1CnciiVAu7V",
+      "structured_formatting": {
+        "main_text": "120 Điện Biên Phủ",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          },
+          {
+            "length": 4,
+            "offset": 4
+          },
+          {
+            "length": 4,
+            "offset": 9
+          },
+          {
+            "length": 3,
+            "offset": 14
+          }
+        ],
+        "secondary_text": "Đa Kao, Quận 1, Hồ Chí Minh",
+        "secondary_text_matched_substrings": []
+      },
+      "has_children": false,
+      "plus_code": {
+        "compound_code": "+6H30U Đa Kao, Quận 1, Hồ Chí Minh",
+        "global_code": "46913+6H30U"
+      },
+      "compound": {
+        "district": "Quận 1",
+        "commune": "Đa Kao",
+        "province": "Hồ Chí Minh"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "120 Điện Biên Phủ"
+        },
+        {
+          "offset": 24,
+          "value": "Đa Kao"
+        },
+        {
+          "offset": 33,
+          "value": "Quận 1"
+        },
+        {
+          "offset": 43,
+          "value": "Hồ Chí Minh"
+        }
+      ],
+      "types": ["house_number"],
+      "distance_meters": null
+    },
+    {
+      "description": "120 Hẻm Điện Biên Phủ, Đa Kao, Quận 1, Thành phố Hồ Chí Minh",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        },
+        {
+          "length": 4,
+          "offset": 8
+        },
+        {
+          "length": 4,
+          "offset": 13
+        },
+        {
+          "length": 3,
+          "offset": 18
+        }
+      ],
+      "place_id": "en8OmSSamIB-hj5esqud-XrfNzmwfIXyfrVMW6xQle1IqWILcmVOWm3mHZRSnRL_Bc5FiJql6e7pOyTNa45mf0HC4dl0gVZXxfblPD1tpmfB8g1yvD1SJmbV-D6-ZVOLZ",
+      "reference": "en8OmSSamIB-hj5esqud-XrfNzmwfIXyfrVMW6xQle1IqWILcmVOWm3mHZRSnRL_Bc5FiJql6e7pOyTNa45mf0HC4dl0gVZXxfblPD1tpmfB8g1yvD1SJmbV-D6-ZVOLZ",
+      "structured_formatting": {
+        "main_text": "120 Hẻm Điện Biên Phủ",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          },
+          {
+            "length": 4,
+            "offset": 8
+          },
+          {
+            "length": 4,
+            "offset": 13
+          },
+          {
+            "length": 3,
+            "offset": 18
+          }
+        ],
+        "secondary_text": "Đa Kao, Quận 1, Thành phố Hồ Chí Minh",
+        "secondary_text_matched_substrings": []
+      },
+      "has_children": false,
+      "plus_code": {
+        "compound_code": "+BMIVNE Đa Kao, Quận 1, Thành phố Hồ Chí Minh",
+        "global_code": "46913+BMIVNE"
+      },
+      "compound": {
+        "district": "Quận 1",
+        "commune": "Đa Kao",
+        "province": "Hồ Chí Minh"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "120 Hẻm Điện Biên Phủ"
+        },
+        {
+          "offset": 30,
+          "value": "Đa Kao"
+        },
+        {
+          "offset": 39,
+          "value": "Quận 1"
+        },
+        {
+          "offset": 49,
+          "value": "Thành phố Hồ Chí Minh"
+        }
+      ],
+      "types": [],
+      "distance_meters": null
+    },
+    {
+      "description": "120 - 122, Đường Điện Biên Phủ, Quận 1, Hồ Chí Minh",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        },
+        {
+          "length": 4,
+          "offset": 17
+        },
+        {
+          "length": 4,
+          "offset": 22
+        },
+        {
+          "length": 3,
+          "offset": 27
+        }
+      ],
+      "place_id": "A1x3A5u5KLt3lW4ykLSdmXDRXBGTZXfScrZAOLzhXMVoo0NXpwKv02i8SFe_ZJnpQ4tMCr9lietxplhWvFiFkUSKSFaSQ7CXcbVDLJVPzlfxlj1Dvo3BXlXKnWIWVAu7V",
+      "reference": "A1x3A5u5KLt3lW4ykLSdmXDRXBGTZXfScrZAOLzhXMVoo0NXpwKv02i8SFe_ZJnpQ4tMCr9lietxplhWvFiFkUSKSFaSQ7CXcbVDLJVPzlfxlj1Dvo3BXlXKnWIWVAu7V",
+      "structured_formatting": {
+        "main_text": "120 - 122",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "Đường Điện Biên Phủ, Quận 1, Hồ Chí Minh",
+        "secondary_text_matched_substrings": [
+          {
+            "length": 4,
+            "offset": 6
+          },
+          {
+            "length": 4,
+            "offset": 11
+          },
+          {
+            "length": 3,
+            "offset": 16
+          }
+        ]
+      },
+      "has_children": false,
+      "plus_code": {
+        "compound_code": "+BMGGB8 Đường Điện Biên Phủ, Quận 1, Hồ Chí Minh",
+        "global_code": "46913+BMGGB8"
+      },
+      "compound": {
+        "district": "Quận 1",
+        "commune": "Đa Kao",
+        "province": "Hồ Chí Minh"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "120 - 122"
+        },
+        {
+          "offset": 10,
+          "value": "Đường Điện Biên Phủ"
+        },
+        {
+          "offset": 41,
+          "value": "Quận 1"
+        },
+        {
+          "offset": 51,
+          "value": "Hồ Chí Minh"
+        }
+      ],
+      "types": [],
+      "distance_meters": null
+    },
+    {
+      "description": "120 Hẻm 153 Điện Biên Phủ, Phường 15, Bình Thạnh, Hồ Chí Minh",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        },
+        {
+          "length": 4,
+          "offset": 12
+        },
+        {
+          "length": 4,
+          "offset": 17
+        },
+        {
+          "length": 3,
+          "offset": 22
+        },
+        {
+          "length": 3,
+          "offset": 27
+        }
+      ],
+      "place_id": "C1apbdKRg_GERrp3vELrvVpFTkmpe5O4b7otC7ZGl8lvk6cwvR2AwGxet7yy6ezL0bJFel7kfMYh1zXsEokKx_GLMd0yNR4iJb2ldSYuri-Jue04dvR2bi2y5RjaLHPDL",
+      "reference": "C1apbdKRg_GERrp3vELrvVpFTkmpe5O4b7otC7ZGl8lvk6cwvR2AwGxet7yy6ezL0bJFel7kfMYh1zXsEokKx_GLMd0yNR4iJb2ldSYuri-Jue04dvR2bi2y5RjaLHPDL",
+      "structured_formatting": {
+        "main_text": "120 Hẻm 153 Điện Biên Phủ",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          },
+          {
+            "length": 4,
+            "offset": 12
+          },
+          {
+            "length": 4,
+            "offset": 17
+          },
+          {
+            "length": 3,
+            "offset": 22
+          }
+        ],
+        "secondary_text": "Phường 15, Bình Thạnh, Hồ Chí Minh",
+        "secondary_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ]
+      },
+      "has_children": false,
+      "plus_code": {
+        "compound_code": "+75VA6 Phường 15, Bình Thạnh, Hồ Chí Minh",
+        "global_code": "46B7D+75VA6"
+      },
+      "compound": {
+        "district": "Bình Thạnh",
+        "commune": "Phường 15",
+        "province": "Hồ Chí Minh"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "120 Hẻm 153 Điện Biên Phủ"
+        },
+        {
+          "offset": 34,
+          "value": "Phường 15"
+        },
+        {
+          "offset": 48,
+          "value": "Bình Thạnh"
+        },
+        {
+          "offset": 63,
+          "value": "Hồ Chí Minh"
+        }
+      ],
+      "types": ["house_number"],
+      "distance_meters": null
+    }
+  ],
+  "execution_time": "",
+  "status": "OK"
+}

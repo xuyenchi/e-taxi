@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ETaxi | Khách Hàng</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+ 
+    <script src='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Trang Chủ</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangky" class="nav-link">Đăng ký</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangnhap" class="nav-link">Đăng nhập</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="thoat" class="nav-link">Thoát</a>
+                </li>
+            </ul>    
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link">
+                <img src="static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">ETaxi</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block"><%= user.hoten %></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Quản lý thông tin hành trình</h1>
+                            <div id="liveAlertPlaceholder"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                                <li class="breadcrumb-item active">Quản lý hành trình</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Thông tin hành trình</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="diachibatdau">Điểm đón</label>
+                                            <button type="button" class="btn btn-block btn-warning" name="laygpshientai" id="laygpshientai">Lấy tọa theo GPS hiện tại</button>
+                                            <input type="text" class="form-control basicAutoComplete" 
+                                                autocomplete="off" id="diachibatdau"
+                                                placeholder="Hoặc nhập địa chỉ nơi đón">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachiketthuc">Điểm đến</label>
+                                            <input type="text" class="form-control" id="diachiketthuc"
+                                                placeholder="Nhập địa chỉ nên cần đến">
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input type="hidden" name="diemdonlat" id="diemdonlat">
+                                        <input type="hidden" name="diemdonlng" id="diemdonlng">
+                                        <input type="hidden" name="diemdenlat" id="diemdenlat">
+                                        <input type="hidden" name="diemdenlng" id="diemdenlng">
+                                        <button type="button" class="btn btn-primary" name="taohanhtrinh" id="taohanhtrinh">Đặt xe</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Thông tin tài xế taxi và hành trình</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="hotennv">Họ tên</label>
+                                            <input type="text" class="form-control" id="hotennv" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sodienthoainv">Số điện thoại</label>
+                                            <input type="number" class="form-control" id="sodienthoainv" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hanhtrinh_diachibatdau">Điểm đón</label>
+                                            <input type="text" class="form-control" id="hanhtrinh_diachibatdau" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hanhtrinh_diachiketthuc">Điểm trả khách</label>
+                                            <input type="text" class="form-control" id="hanhtrinh_diachiketthuc" disabled>
+                                            <input type="hidden" name="hanhtrinhId" id="hanhtrinhId">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <!--map-->
+                        <div id='map' style='width: 100%; height: 750px;'></div>
+                        <!--Maps-->
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+            </div>
+            <strong>Copyright &copy; 2024 ETaxi All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="static/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mapbox/polyline/src/polyline.js"></script>
+    <script src="https://unpkg.com/@goongmaps/goong-sdk/umd/goong-sdk.min.js"></script>
+    <script>
+        $(function () {
+           // lấy thông tin id người dùng từ session sau đăng nhập
+           const userid = parseInt('<%=user.id%>');
+            // khởi tạo thông tin websocket
+            const ws = new WebSocket('<%=ws_url%>');
+
+            // lưu trữ thông tin hành trình
+            let hanhtrinh;
+
+            // hiển thị map
+            var markerStart;
+            var markerEnd;
+            var currentMaker;
+            goongjs.accessToken = '<%=map_key%>';
+            var map = new goongjs.Map({
+                container: 'map',
+                style: 'https://tiles.goong.io/assets/goong_map_web.json', // stylesheet location
+                center: [106.660172, 10.762622], // starting position [lng, lat]
+                zoom: 10 // starting zoom
+            });
+            // Initialize goongClient with an API KEY
+            var goongClient = goongSdk({
+                accessToken: '<%=map_api_key%>'
+            });
+
+            // đăng ký websocket client tới sersocket server
+            ws.addEventListener("open", () => {
+                console.log("We are connected");
+                ws.send(JSON.stringify({'userid' : userid, 'type' : 'register'}));
+            });
+
+            // quản lý messages tới từ websocket server
+            ws.addEventListener("message", function (event) {
+                var messages = JSON.parse(event.data);
+                if(messages.type == 'cotaixe') {
+                    hanhtrinh = messages.data;
+                    //alert('Đã có tài xế');
+                    $(document).Toasts('create', {
+                        class: 'bg-success',
+                        title: 'Thông tin ứng dụng',
+                        //autohide: true,
+                        //delay: 5000,
+                        body: 'Đã có tài xế. Kiểm tra thông tin hành trình và chờ tài xế đón.'
+                    });
+                    // điền thông tin tài xế vào form
+                    $('#hotennv').val(hanhtrinh.hotennv);
+                    $('#sodienthoainv').val(hanhtrinh.sodienthoainv);
+                    $('#hanhtrinh_diachibatdau').val(hanhtrinh.diachibatdau);
+                    $('#hanhtrinh_diachiketthuc').val(hanhtrinh.diachiketthuc);
+                    $('#hanhtrinhId').val(hanhtrinh.id);
+
+                    // vẽ đường đi trên map
+                    var start = hanhtrinh.diemdonlat + ',' + hanhtrinh.diemdonlng;
+                    var end = hanhtrinh.diemdenlat + ',' + hanhtrinh.diemdenlng;
+                    // Get Directions
+                    goongClient.directions
+                        .getDirections({
+                            origin : start,
+                            destination : end,
+                            vehicle: 'car'
+                        })
+                        .send()
+                        .then(function (response) {
+                            var directions = response.body;
+                            var route = directions.routes[0];
+
+                            var geometry_string = route.overview_polyline.points;
+                            var geoJSON = polyline.toGeoJSON(geometry_string);
+                            if (typeof map.getSource('route') === 'undefined') {
+                                map.addSource('route', {
+                                    'type': 'geojson',
+                                    'data': geoJSON
+                                });
+                            }
+                            else {
+                                map.getSource('route').setData(geoJSON);
+                            }
+                            
+                            // Add route layer below symbol layers
+                            if(typeof map.getLayer('route') !== 'undefined') {
+                                map.removeLayer('route');
+                            }
+                            map.addLayer(
+                                {
+                                    'id': 'route',
+                                    'type': 'line',
+                                    'source': 'route',
+                                    'layout': {
+                                        'line-join': 'round',
+                                        'line-cap': 'round'
+                                    },
+                                    'paint': {
+                                        'line-color': 'green',
+                                        'line-width': 8
+                                    }
+                                },
+                            );
+                            
+                            // vẽ điểm đi, đến
+                            if(markerStart) {
+                                markerStart.remove();
+                            }
+                            markerStart = new goongjs.Marker()
+                                .setLngLat([hanhtrinh.diemdonlng, hanhtrinh.diemdonlat])
+                                .addTo(map);
+
+                            if(markerEnd) {
+                                markerEnd.remove(); 
+                            }
+                            markerEnd = new goongjs.Marker()
+                                .setLngLat([hanhtrinh.diemdenlng, hanhtrinh.diemdenlat])
+                                .addTo(map);
+
+                            map.flyTo({
+                                center: [
+                                    hanhtrinh.diemdonlng,
+                                    hanhtrinh.diemdonlat
+                                ],
+                                essential: true
+                            });
+                        });
+                    }
+                    else if(messages.type == 'toado') {
+                        var toado = messages.data;
+                        console.log(`tọa độ tài xế : ${toado.lat} - ${toado.lng}`);
+
+                        // vẽ tọa đô tài xế
+                        if(currentMaker) {
+                            currentMaker.remove(); 
+                        }
+                        currentMaker = new goongjs.Marker({color : 'green'})
+                                .setLngLat([toado.lng, toado.lat])
+                                .addTo(map);
+                    }
+            });
+
+            // lấy tọa độ hiên tại laygpshientai
+            $("#laygpshientai").click(function () {
+                if ("geolocation" in navigator){ 
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        $('#diemdonlat').val(position.coords.latitude);
+                        $('#diemdonlng').val(position.coords.longitude);
+                        $.ajax( {
+                            url: "/api/hanhtrinh/searchdiadiemtheotoado?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude,
+                            success: function( data ) {
+                                $('#diachibatdau').val(data.results[0].formatted_address);
+                            }
+                        });
+                    });
+                } else {
+                    //alert("Trình duyệt không hỗ trợ lấy tọa độ!");
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        autohide: true,
+                        delay: 5000,
+                        title: 'Thông tin tọa độ',
+                        body: 'Trình duyệt không hỗ trợ lấy tọa độ!'
+                    })
+                }
+            });
+
+            $('#diachibatdau').autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "/api/hanhtrinh/searchdiadiem",
+                        data: {
+                            text: request.term
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            response(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    value: item.description,
+                                    id : item.place_id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 5,
+                select: function( event, ui ) {
+                    console.log("Selected: " + ui.item.value + " --- " + ui.item.id);
+                    $.ajax( {
+                        url: "/api/hanhtrinh/detaildiadiem",
+                        data: {
+                            placeId: ui.item.id
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            $('#diemdonlat').val(data.lat);
+                            $('#diemdonlng').val(data.lng);
+                        }
+                    });
+                }
+            });
+
+            $('#diachiketthuc').autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "/api/hanhtrinh/searchdiadiem",
+                        data: {
+                            text: request.term
+                        },
+                        success: function( data ) {
+                            //console.log(data);
+                            //response(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    value: item.description,
+                                    id : item.place_id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 5,
+                select: function( event, ui ) {
+                    //console.log("Selected: " + ui.item.value + " --- " + ui.item.id);
+                    $.ajax( {
+                        url: "/api/hanhtrinh/detaildiadiem",
+                        data: {
+                            placeId: ui.item.id
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            $('#diemdenlat').val(data.lat);
+                            $('#diemdenlng').val(data.lng);
+                        }
+                    });
+                }
+            });
+
+            // tạo hành trình
+            $("#taohanhtrinh").click(function() {
+                var tenkhachhang = '<%=user.hoten%>';
+                var sodienthoai = '<%=user.sodienthoai%>';
+                var diachibatdau = $('#diachibatdau').val();
+                var diachiketthuc = $('#diachiketthuc').val();
+
+                var diemdonlat = $('#diemdonlat').val();
+                var diemdonlng = $('#diemdonlng').val();
+                var diemdenlat = $('#diemdenlat').val();
+                var diemdenlng = $('#diemdenlng').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/hanhtrinh",
+                    dataType: 'json',
+                    data: { 
+                        tenkhachhang: tenkhachhang,
+                        sodienthoai: sodienthoai,
+                        diachibatdau : diachibatdau,
+                        diachiketthuc : diachiketthuc,
+                        diemdonlat : diemdonlat,
+                        diemdonlng : diemdonlng,
+                        diemdenlat : diemdenlat,
+                        diemdenlng : diemdenlng,
+                        khachhangid : userid
+                    },
+                    success: function(result) {
+                        if(result.status == true && result.data > 0) {
+                            //alert('Đặt xe thành công, đang chờ tìm tài xế taxi');
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                title: 'Thông tin ứng dụng',
+                                autohide: true,
+                                delay: 5000,
+                                body: 'Đặt xe thành công, đang tìm tài xế taxi.'
+                            });
+                            // gọi socket để tìm tài xế
+                            ws.send(JSON.stringify({'userid' : userid, 'type' : 'cuocxemoi', 'data' : {'hanhtrinhid' : result.data}}));
+                        }
+                        else {
+                            //alert('Đặt xe thất bại');
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Đặt xe thất bại. Kiểm tra lại thông tin đặt xe.'
+                            })
+                        }
+                    },
+                    error: function(jqXHR, textStatus, err) {
+                        //show error message
+                        alert('text status '+textStatus+', err '+err)
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="jquerylib/jquery-ui.min.js"></script>
+    <link href="jquerylib/jquery-ui.min.css" rel="stylesheet" />
+</body>
+</html>

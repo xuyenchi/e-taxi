@@ -1,0 +1,19 @@
+
+Cài đặt Postgres
+Cài đặt Postis : https://postgis.net/documentation/getting_started/install_macos/
+
+Chạy restore database từ file etaxi.sql trong folder databases
+
+Giải nén :
+node-websocket-server (websocket để gửi nhận data realtime cho hệ thống)
+
+node-postgres (iao tiếp với database postgres để tạo rest api)
+
+node-tongdai (web tổng đài nhận đặt xe)
+
+node-khachhang (web cho khách hàng tự đặt xe)
+
+node-nhanvien (web cho nhân viên taxi)
+
+Sau khi giải nén các folder trên, thì vào trong các thư mục mới giải nén chạy lệnn 'npm run serve' để start dự án
+Các thông số cần thay đổi như cấu hình database, port chạy web có thể thay đổi trong file config.js

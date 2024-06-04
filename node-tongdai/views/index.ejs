@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Etaxi | Tổng đài</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+
+    
+    <script src='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Trang Chủ</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangky" class="nav-link">Đăng ký</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangnhap" class="nav-link">Đăng nhập</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="thoat" class="nav-link">Thoát</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="static/index3.html" class="brand-link">
+                <img src="static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">ETaxi</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="info">
+                        <a href="#" class="d-block"><%= user.hoten %></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Tổng đài đặt xe thông qua cuộc gọi</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                                <li class="breadcrumb-item active">Tổng đài đặt xe</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Thông tin khách hàng</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="tenkhachhang">Họ tên</label>
+                                            <input type="text" class="form-control" id="tenkhachhang"
+                                                placeholder="Nhập họ tên">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sodienthoai">Số điện thoại</label>
+                                            <input type="number" class="form-control" id="sodienthoai"
+                                                placeholder="Nhập số điện thoại">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachibatdau">Điểm đón</label>
+                                            <input type="text" class="form-control basicAutoComplete" 
+                                                autocomplete="off" id="diachibatdau"
+                                                placeholder="Nhập địa chỉ nơi đón">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachiketthuc">Điểm trả khách</label>
+                                            <input type="text" class="form-control" id="diachiketthuc"
+                                                placeholder="Nhập địa chỉ nên cần đến">
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input type="hidden" name="diemdonlat" id="diemdonlat">
+                                        <input type="hidden" name="diemdonlng" id="diemdonlng">
+                                        <input type="hidden" name="diemdenlat" id="diemdenlat">
+                                        <input type="hidden" name="diemdenlng" id="diemdenlng">
+                                        <button type="button" class="btn btn-primary" name="taohanhtrinh" id="taohanhtrinh">Nhập hành trình</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <!--Google map-->
+                            <div id='map' style='width: 100%; height: 100%;'></div>
+                            <!--Google Maps-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Danh sách đặt xe
+                                    </h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="taxiTable" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Khách hàng</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Điểm đón khách</th>
+                                                <th>Điểm trả khách</th>
+                                                <th>Tài xế</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Tình Trạng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="static/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="static/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="static/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="static/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="static/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="static/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="static/plugins/jszip/jszip.min.js"></script>
+    <script src="static/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="static/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="static/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="static/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="static/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="static/dist/js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            // lấy thông tin id người dùng từ session sau đăng nhập
+            const userid = parseInt('<%=user.id%>');
+            // khởi tạo thông tin websocket
+            const ws = new WebSocket('<%=ws_url%>');
+
+            // đăng ký websocket client tới sersocket server
+            ws.addEventListener("open", () => {
+                console.log("We are connected");
+                ws.send(JSON.stringify({'userid' : userid, 'type' : 'register'}));
+            });
+
+            // quản lý messages tới từ websocket server
+            ws.addEventListener("message", function (event) {
+                //console.log(event.data);
+                const hanhtrinh = JSON.parse(event.data);
+                const tenkhachhang = hanhtrinh.tenkhachhang
+                $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'Thông tin ứng dụng',
+                    body: 'Tài xế đã nhận hành trình do khách hàng ' + tenkhachhang + ' đặt.'
+                })
+
+                // tải lại thông tin hành trình xe
+                $('#taxiTable').DataTable().ajax.reload();
+            });
+
+            $('#diachibatdau').autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "/api/hanhtrinh/searchdiadiem",
+                        data: {
+                            text: request.term
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            response(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    value: item.description,
+                                    id : item.place_id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 5,
+                select: function( event, ui ) {
+                    //console.log("Selected: " + ui.item.value + " --- " + ui.item.id);
+                    $.ajax( {
+                        url: "/api/hanhtrinh/detaildiadiem",
+                        data: {
+                            placeId: ui.item.id
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            $('#diemdonlat').val(data.lat);
+                            $('#diemdonlng').val(data.lng);
+                        }
+                    });
+                }
+            });
+
+            $('#diachiketthuc').autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "/api/hanhtrinh/searchdiadiem",
+                        data: {
+                            text: request.term
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            response(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    value: item.description,
+                                    id : item.place_id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 5,
+                select: function( event, ui ) {
+                    //console.log("Selected: " + ui.item.value + " --- " + ui.item.id);
+                    $.ajax( {
+                        url: "/api/hanhtrinh/detaildiadiem",
+                        data: {
+                            placeId: ui.item.id
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            $('#diemdenlat').val(data.lat);
+                            $('#diemdenlng').val(data.lng);
+                        }
+                    });
+                }
+            });
+
+            // tạo hành trình
+            $("#taohanhtrinh").click(function() {
+                var tenkhachhang = $('#tenkhachhang').val();
+                var sodienthoai = $('#sodienthoai').val();
+                var diachibatdau = $('#diachibatdau').val();
+                var diachiketthuc = $('#diachiketthuc').val();
+
+                var diemdonlat = $('#diemdonlat').val();
+                var diemdonlng = $('#diemdonlng').val();
+                var diemdenlat = $('#diemdenlat').val();
+                var diemdenlng = $('#diemdenlng').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/hanhtrinh",
+                    dataType: 'json',
+                    data: { 
+                        tenkhachhang: tenkhachhang,
+                        sodienthoai: sodienthoai,
+                        diachibatdau : diachibatdau,
+                        diachiketthuc : diachiketthuc,
+                        diemdonlat : diemdonlat,
+                        diemdonlng : diemdonlng,
+                        diemdenlat : diemdenlat,
+                        diemdenlng : diemdenlng,
+                        nvtongdai : userid
+                    },
+                    success: function(result) {
+                        if(result.status == true && result.data > 0) {
+                            //alert('Nhập hành trình thành công');
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                title: 'Thông tin ứng dụng',
+                                autohide: true,
+                                delay: 5000,
+                                body: 'Nhập hành trình thành công.'
+                            });
+                            $('#tenkhachhang').val('');
+                            $('#sodienthoai').val('');
+                            $('#diachibatdau').val('');
+                            $('#diachiketthuc').val('');
+
+                            $('#diemdonlat').val('');
+                            $('#diemdonlng').val('');
+                            $('#diemdenlat').val('');
+                            $('#diemdenlng').val('');
+
+                            // tải lại thông tin hành trình xe
+                            $('#taxiTable').DataTable().ajax.reload();
+
+                            // gọi socket để tìm tài xế
+                            ws.send(JSON.stringify({'userid' : userid, 'type' : 'cuocxemoi', 'data' : {'hanhtrinhid' : result.data}}));
+                        }
+                        else {
+                            //alert('Nhập hành trình thất bại');
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Nhập hành trình thất bại.'
+                            })
+                        }
+                    },
+                    error: function(jqXHR, textStatus, err) {
+                        //show error message
+                        alert('text status '+textStatus+', err '+err)
+                    }
+                });
+            });
+
+
+            // danh sách hành trình
+            $('#taxiTable').DataTable({
+                "order": [],
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                'ajax' : {
+                    'url' : '/api/hanhtrinh?nvtongdai=' + userid
+                },
+                'columns' : [
+                    { data : 'tenkhachhang' },
+                    { data : 'dienthoaikhachhang' },
+                    { data : 'diachibatdau' },
+                    { data : 'diachiketthuc' },
+                    { data : 'tennhanvien' },
+                    { data : 'dienthoainhanvien' },
+                    {
+                        data: 'tinhtrang',
+                        "render": function ( data, type, row ) {
+                            if (data == 0) {
+                                return '<span style="color:black">Đang chờ xe</span>'
+                            }
+                            else if (data == 1) {
+                                return '<span style="color:blue">Đã có xe</span>'
+                            }
+                            else if (data == 2) {
+                                return '<span style="color:red">Hủy chuyến</span>'
+                            }
+                            else if (data == 3) {
+                                return '<span style="color:green">Hoàn thành</span>'
+                            }
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+    <script src="jquerylib/jquery-ui.min.js"></script>
+    <link href="jquerylib/jquery-ui.min.css" rel="stylesheet" />
+</body>
+
+</html>

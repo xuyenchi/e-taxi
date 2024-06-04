@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ETaxi | Nhân Viên Taxi</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+ 
+    <script src='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css' rel='stylesheet' />
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Trang Chủ</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangky" class="nav-link">Đăng ký</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="dangnhap" class="nav-link">Đăng nhập</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="thoat" class="nav-link">Thoát</a>
+                </li>
+            </ul>    
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link">
+                <img src="static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">ETaxi</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block"><%= user.hoten %></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Quản lý thông tin khách đặt xe</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                                <li class="breadcrumb-item active">Thông tin khách hàng</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Cập nhật vị trí tài xế</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-block btn-warning" name="laygpshientai" id="laygpshientai">Lấy tọa theo GPS hiện tại</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachihientai">Hoặc nhâp dịa chỉ hiện tại</label>
+                                            <input type="text" class="form-control" id="diachihientai" placeholder="Nhập địa chỉ hiện tại" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kinhdo">Kinh độ</label>
+                                            <input type="text" class="form-control" id="kinhdo" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="vido">Vĩ độ</label>
+                                            <input type="text" class="form-control" id="vido" disabled >
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div style="float: left;">
+                                            <button type="button" class="btn btn-primary" name="capnhattoado" id="capnhattoado">Cập nhật tọa độ</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Thông tin khách hàng đang đặt xe</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="tenkhachhang">Họ tên</label>
+                                            <input type="text" class="form-control" id="tenkhachhang" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sodienthoai">Số điện thoại</label>
+                                            <input type="number" class="form-control" id="sodienthoai" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachibatdau">Điểm đón</label>
+                                            <input type="text" class="form-control" id="diachibatdau" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diachiketthuc">Điểm trả khách</label>
+                                            <input type="text" class="form-control" id="diachiketthuc" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input type="hidden" id="hanhtrinhId">
+                                        <div style="float: left;">
+                                            <button type="button" class="btn btn-primary" name="nhanhanhtrinh" id="nhanhanhtrinh">Nhận hành trình</button>
+                                        </div>
+                                        <div style="float: left; padding-left: 10px;">
+                                            <button type="button" class="btn btn-success" name="batdaudichuyen" id="batdaudichuyen">Di chuyển đón khách</button>
+                                        </div>
+                                        <div style="float: right;">
+                                            <button type="button" class="btn btn-block btn-danger" name="huyhanhtrinh" id="huyhanhtrinh">Hủy hành trình</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <!--map-->
+                        <div id='map' style='width: 100%; height: 750px;'></div>
+                        <!--Maps-->
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+            </div>
+            <strong>Copyright &copy; 2024 ETaxi All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="static/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mapbox/polyline/src/polyline.js"></script>
+    <script src="https://unpkg.com/@goongmaps/goong-sdk/umd/goong-sdk.min.js"></script>
+    <script>
+        $(function () {
+            // lấy thông tin id người dùng từ session sau đăng nhập
+            const userid = parseInt('<%=user.id%>');
+            // khởi tạo thông tin websocket
+            const ws = new WebSocket('<%=ws_url%>');
+            // tạo lưu trữ thông tin hành trình
+            let hanhtrinh;
+
+            // kinh độ , vĩ độ hiện tại của người dùng từ session sau đăng nhập
+            $('#vido').val('<%=user.lat%>');
+            $('#kinhdo').val('<%=user.lng%>');
+
+            // điểm bắt đầu hành trình
+            var markerStart;
+            // điểm kết thúc hành trình
+            var markerEnd;
+
+            // hiển thị map
+            goongjs.accessToken = '<%=map_key%>';
+            var map = new goongjs.Map({
+                container: 'map',
+                style: 'https://tiles.goong.io/assets/goong_map_web.json', // stylesheet location
+                center: [106.660172, 10.762622], // starting position [lng, lat]
+                zoom: 10
+            });
+            // khởi tạo goongClient sdk
+            var goongClient = goongSdk({
+                accessToken: '<%=map_api_key%>'
+            });
+
+            // lấy tọa độ hiên tại
+            $("#laygpshientai").click(function () {
+                if ("geolocation" in navigator) { 
+                    // gọi trình duyệt cho lấy thông tin GPS hiện tại
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        $('#vido').val(position.coords.latitude);
+                        $('#kinhdo').val(position.coords.longitude);
+                    });
+                } else {
+                    //alert("Trình duyệt không hỗ trợ lấy tọa độ!");
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        autohide: true,
+                        delay: 5000,
+                        title: 'Thông tin tọa độ',
+                        body: 'Trình duyệt không hỗ trợ lấy tọa độ!'
+                    })
+                }
+            });
+
+            // tìm kiếm địa chỉ hiện tại theo từ khóa
+            $('#diachihientai').autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "/api/hanhtrinh/searchdiadiem",
+                        data: {
+                            text: request.term
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            response(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    value: item.description,
+                                    id : item.place_id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 5,
+                select: function( event, ui ) {
+                    console.log("Selected: " + ui.item.value + " --- " + ui.item.id);
+                    $.ajax( {
+                        url: "/api/hanhtrinh/detaildiadiem",
+                        data: {
+                            placeId: ui.item.id
+                        },
+                        success: function( data ) {
+                            console.log(data);
+                            $('#vido').val(data.lat);
+                            $('#kinhdo').val(data.lng);
+                        }
+                    });
+                }
+            });
+
+            // cập nhật tọa độ hiện tại
+            $("#capnhattoado").click(function() {
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/nguoidung/capnhattoato",
+                    dataType: 'json',
+                    data: { 
+                        userid: userid,
+                        lat: $('#vido').val(),
+                        lng: $('#kinhdo').val(),
+                    },
+                    success: function(result) {
+                        if(result.status == true) {
+                            //alert('Cập nhật tọa độ thành công');
+                            $('#diachihientai').val('');
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin tọa độ',
+                                body: 'Cập nhật tọa độ thành công.'
+                            })
+                        }
+                        else {
+                            //alert('Cập nhật tọa độ thất bại');
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin tọa độ',
+                                body: 'Cập nhật tọa độ thất bại.'
+                            })
+                        }
+                    },
+                    error: function(jqXHR, textStatus, err) {
+                        //show error message
+                        alert('text status '+textStatus+', err '+err)
+                    }
+                });
+            });
+
+            // nhận hành trình   
+            $("#nhanhanhtrinh").click(function() {
+                var hanhtrinhId = $('#hanhtrinhId').val();
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/hanhtrinh/nhan",
+                    dataType: 'json',
+                    data: { 
+                        hanhtrinhId: hanhtrinhId,
+                        nhanvienId: userid,
+                    },
+                    success: function(result) {
+                        if(result.status == true) {
+                            //alert('Nhận hành trình thành công');
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Nhận hành trình thành công.'
+                            })
+
+                            $("#nhanhanhtrinh").prop('disabled', true);
+                            $("#huyhanhtrinh").prop('disabled', true);
+                            $("#batdaudichuyen").prop('disabled', false);
+                            hanhtrinh.hotennv = '<%=user.hoten%>';
+                            hanhtrinh.sodienthoainv = '<%=user.sodienthoai%>';
+                            // gọi socket để thông báo SMS hoặc thông báo trên APP khách hàng
+                            ws.send(JSON.stringify({'userid' : userid, 'type' : 'nhanhanhtrinh', 
+                                'data' : {
+                                    'hanhtrinh' : hanhtrinh
+                                }
+                            }));
+                        }
+                        else {
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Nhận hành trình thất bại.'
+                            })
+                        }
+                    },
+                    error: function(jqXHR, textStatus, err) {
+                        //show error message
+                        alert('text status '+textStatus+', err '+err)
+                    }
+                });
+            });
+
+            // hủy hành trình   
+            $("#huyhanhtrinh").click(function() {
+                var hanhtrinhId = $('#hanhtrinhId').val();
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/hanhtrinh/huy",
+                    dataType: 'json',
+                    data: { 
+                        hanhtrinhId: hanhtrinhId,
+                        nhanvienId: userid,
+                    },
+                    success: function(result) {
+                        if(result.status == true) {
+                            //alert('Hủy hành trình thành công');
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Hủy hành trình thành công.'
+                            })
+
+                            $("#nhanhanhtrinh").prop('disabled', true);
+                            $("#huyhanhtrinh").prop('disabled', true);
+                            // gọi socket để thông báo đã hủy cuốc xe, thông báo cuốc xe đến các tài xế khác
+                            ws.send(JSON.stringify({'userid' : userid, 'type' : 'huyhanhtrinh', 'data' : {'hanhtrinhid' : hanhtrinhId}}));
+                        }
+                        else {
+                            //alert('Hủy hành trình thất bại');
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                autohide: true,
+                                delay: 5000,
+                                title: 'Thông tin ứng dụng',
+                                body: 'Hủy hành trình thất bại.'
+                            })
+                        }
+                    },
+                    error: function(jqXHR, textStatus, err) {
+                        //show error message
+                        alert('text status '+textStatus+', err '+err)
+                    }
+                });
+            });
+
+            $("#batdaudichuyen").click(function() {
+                //alert('don khach')
+                // cập nhật tọa độ di chuyển để báo cho khách hàng
+                if(hanhtrinh.khachhangid !== null) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/hanhtrinh/duongdi",
+                        dataType: 'json',
+                        data: { 
+                            startlat: $('#vido').val(),
+                            startlng: $('#kinhdo').val(),
+                            endlat : hanhtrinh.diemdonlat,
+                            endlng : hanhtrinh.diemdonlng
+                        },
+                        success: function(result) {
+                            //console.log(result);
+                            $("#batdaudichuyen").prop('disabled', true);
+                            const steps = result.routes[0].legs[0].steps;
+                            let dataToSend = [];
+                            //console.log(steps);
+                            steps.forEach((item) => {
+                                //console.log('start_location lat: ' + item.start_location.lat);
+                                //console.log('start_location lng: ' + item.start_location.lng);
+                                var dataStart = JSON.stringify({'userid' : userid, 'type' : 'dichuyen', 'data' : {'khachhangid' : hanhtrinh.khachhangid, 'lat' : item.start_location.lat, 'lng' : item.start_location.lng}});
+                                //console.log(data);
+                                dataToSend.push(dataStart);
+                                
+                                //console.log('end_location lat: ' + item.end_location.lat);
+                                //console.log('end_location lng: ' + item.end_location.lng);
+                                var dataEnd = JSON.stringify({'userid' : userid, 'type' : 'dichuyen', 'data' : {'khachhangid' : hanhtrinh.khachhangid, 'lat' : item.end_location.lat, 'lng' : item.end_location.lng}});
+                                //console.log(data2);
+                                dataToSend.push(dataEnd);
+                            });
+
+                            // Vòng lặp để gửi dữ liệu
+                            //console.log(dataToSend);
+                            dataToSend.forEach((item, index) => {
+                                //console.log(item);
+                                // Gửi dữ liệu sau mỗi khoảng thời gian cố định
+                                setTimeout(() => {
+                                    ws.send(item);
+                                }, index * 5000); // Sử dụng biến index để tính thời gian delay
+                            });
+                        },
+                        error: function(jqXHR, textStatus, err) {
+                            //show error message
+                            alert('text status '+textStatus+', err '+err)
+                        }
+                    });
+                }
+            });
+            
+            // đăng ký websocket client với websocket server
+            ws.addEventListener("open", () => {
+                console.log("We are connected");
+                ws.send(JSON.stringify({'userid' : userid, 'type' : 'register'}));
+            });
+
+            // quản lý message từ websocket server gửi lên
+            ws.addEventListener("message", function (event) {
+                //alert('Có khách hàng đặt xe');
+                $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'Thông tin ứng dụng',
+                    body: 'Có khách hàng đặt xe. Kiểm tra thông tin và nhận hoặc hủy chuyến.'
+                })
+
+                hanhtrinh = JSON.parse(event.data);
+                $("#nhanhanhtrinh").prop('disabled', false);
+                $("#huyhanhtrinh").prop('disabled', false);
+                $("#batdaudichuyen").prop('disabled', true);
+                $('#tenkhachhang').val(hanhtrinh.tenkhachhang);
+                $('#sodienthoai').val(hanhtrinh.sodienthoai);
+                $('#diachibatdau').val(hanhtrinh.diachibatdau);
+                $('#diachiketthuc').val(hanhtrinh.diachiketthuc);
+                $('#hanhtrinhId').val(hanhtrinh.id);
+
+                // vẽ đường đi trên map
+                var start = hanhtrinh.diemdonlat + ',' + hanhtrinh.diemdonlng;
+                var end = hanhtrinh.diemdenlat + ',' + hanhtrinh.diemdenlng;
+                // Get Directions
+                goongClient.directions
+                    .getDirections({
+                        origin : start,
+                        destination : end,
+                        vehicle: 'car'
+                    })
+                    .send()
+                    .then(function (response) {
+                        var directions = response.body;
+                        var route = directions.routes[0];
+
+                        var geometry_string = route.overview_polyline.points;
+                        var geoJSON = polyline.toGeoJSON(geometry_string);
+                        if (typeof map.getSource('route') === 'undefined') {
+                            map.addSource('route', {
+                                'type': 'geojson',
+                                'data': geoJSON
+                            });
+                        }
+                        else {
+                            map.getSource('route').setData(geoJSON);
+                        }
+                        
+                        // Add route layer below symbol layers
+                        if(typeof map.getLayer('route') !== 'undefined') {
+                            map.removeLayer('route');
+                        }
+                        map.addLayer(
+                            {
+                                'id': 'route',
+                                'type': 'line',
+                                'source': 'route',
+                                'layout': {
+                                    'line-join': 'round',
+                                    'line-cap': 'round'
+                                },
+                                'paint': {
+                                    'line-color': 'green',
+                                    'line-width': 8
+                                }
+                            },
+                        );
+                        
+                        // vẽ điểm đi, đến
+                        if(markerStart) {
+                            markerStart.remove();
+                        }
+                        markerStart = new goongjs.Marker()
+                            .setLngLat([hanhtrinh.diemdonlng, hanhtrinh.diemdonlat])
+                            .addTo(map);
+
+                        if(markerEnd) {
+                            markerEnd.remove(); 
+                        }
+                        markerEnd = new goongjs.Marker()
+                            .setLngLat([hanhtrinh.diemdenlng, hanhtrinh.diemdenlat])
+                            .addTo(map);
+                        // di chuyển map center đến điểm đón
+                        map.flyTo({
+                            center: [
+                                hanhtrinh.diemdonlng,
+                                hanhtrinh.diemdonlat
+                            ],
+                            essential: true
+                        });
+                    });
+            });
+        });
+    </script>
+    <script src="jquerylib/jquery-ui.min.js"></script>
+    <link href="jquerylib/jquery-ui.min.css" rel="stylesheet" />
+</body>
+</html>
